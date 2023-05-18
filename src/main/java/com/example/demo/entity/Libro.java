@@ -17,6 +17,7 @@ public class Libro {
 	private int id;
 	private String titulo;
 	private String autor;
+	private String resumen;
 	private String ISBN;
 	private int pag;
 	private float nota;
@@ -34,12 +35,13 @@ public class Libro {
 		super();
 	}
 
-	public Libro(int id, String titulo, String autor, String iSBN, int pag, float nota, String imagen,
+	public Libro(int id, String titulo, String autor, String resumen, String iSBN, int pag, float nota, String imagen,
 			List<Comentario> comentariosList, List<Valoracion> listValoraciones, List<PagActual> listPagina) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
 		this.autor = autor;
+		this.resumen = resumen;
 		ISBN = iSBN;
 		this.pag = pag;
 		this.nota = nota;
@@ -129,6 +131,11 @@ public class Libro {
 		this.listPagina = listPagina;
 	}
 
+	public String getResumen() {
+		return resumen;
+	}
 
-
+	public void setResumen(String resumen) {
+		this.resumen = resumen;
+	}
 }
