@@ -31,18 +31,16 @@ public class Libro {
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idLibro")
     private List<PagActual> listPagina;
+
 	public Libro() {
-		super();
 	}
 
-	public Libro(int id, String titulo, String autor, String resumen, String iSBN, int pag, float nota, String imagen,
-			List<Comentario> comentariosList, List<Valoracion> listValoraciones, List<PagActual> listPagina) {
-		super();
+	public Libro(int id, String titulo, String autor, String resumen, String ISBN, int pag, float nota, String imagen, List<Comentario> comentariosList, List<Valoracion> listValoraciones, List<PagActual> listPagina) {
 		this.id = id;
 		this.titulo = titulo;
 		this.autor = autor;
 		this.resumen = resumen;
-		ISBN = iSBN;
+		this.ISBN = ISBN;
 		this.pag = pag;
 		this.nota = nota;
 		this.imagen = imagen;
@@ -50,7 +48,7 @@ public class Libro {
 		this.listValoraciones = listValoraciones;
 		this.listPagina = listPagina;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -75,12 +73,20 @@ public class Libro {
 		this.autor = autor;
 	}
 
+	public String getResumen() {
+		return resumen;
+	}
+
+	public void setResumen(String resumen) {
+		this.resumen = resumen;
+	}
+
 	public String getISBN() {
 		return ISBN;
 	}
 
-	public void setISBN(String iSBN) {
-		ISBN = iSBN;
+	public void setISBN(String ISBN) {
+		this.ISBN = ISBN;
 	}
 
 	public int getPag() {
@@ -122,20 +128,12 @@ public class Libro {
 	public void setListValoraciones(List<Valoracion> listValoraciones) {
 		this.listValoraciones = listValoraciones;
 	}
-	
+
 	public List<PagActual> getListPagina() {
 		return listPagina;
 	}
 
 	public void setListPagina(List<PagActual> listPagina) {
 		this.listPagina = listPagina;
-	}
-
-	public String getResumen() {
-		return resumen;
-	}
-
-	public void setResumen(String resumen) {
-		this.resumen = resumen;
 	}
 }
