@@ -117,19 +117,31 @@ public class RestLibros {
         User user = userService.addFav(idLibro,username);
 		return ResponseEntity.ok().build();
 	}
-	
+	//Endpoint que elimina libro favorito
+	@PutMapping("/libros/deleteFav/{idLibro}")
+	private ResponseEntity<?> deleteFav(@PathVariable int idLibro) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		User user = userService.deleteFav(idLibro,username);
+		return ResponseEntity.ok().build();
+	}
 	//Endpoint Recuperar lista libros favoritos
 	@GetMapping("/libros/getFavs")
 	private ResponseEntity<?> getFavs() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        int id = ((User) authentication).getId();
-        List<Integer> listFavs = userService.getFavs(id);
+		String username = authentication.getName();
+        User u = userService.findUser(username);
+        List<Integer> listFavs = userService.getFavs(u.getId());
 		return ResponseEntity.ok(listFavs);
 	}
 	
 	//Endpoint añadir nota a libro
 	@PostMapping("/libros/nota")
 	private ResponseEntity<?> addNota(@RequestBody ValoracionDTO v){
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		User u = userService.findUser(username);
+		v.setIdUsuario(u.getId());
 		valoracionService.addValoracion(v);
 		return ResponseEntity.ok(v);
 	}
@@ -139,16 +151,8 @@ public class RestLibros {
 	private ResponseEntity<?> readNota(@PathVariable int idLibro){
 		valoracionService.findValoracionByIdLibro(idLibro);
 		return ResponseEntity.ok().build();
-		
 	}
-	//Endpoint que elimina libro favorito
-	@PutMapping("/libros/deleteFav/{id}")
-	private ResponseEntity<?> deleteFav(@PathVariable int idLibro) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        User user = userService.deleteFav(idLibro,username);
-		return ResponseEntity.ok().build();
-	}
+
 	
 	//Endpoint muestra todos los comentarios de un libro
 	@GetMapping("/libros/comentario/{idLibro}")
@@ -160,6 +164,10 @@ public class RestLibros {
 	//Endpoint añadir comentario a libro 
 	@PostMapping("/libros/comentario")
 	private ResponseEntity<?> addComentarioByIdLibro(@RequestBody ComentarioDTO comentario){
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		User u = userService.findUser(username);
+		comentario.setIdUsuario(u.getId());
 		comentarioService.addComentario(comentario);
 		return ResponseEntity.ok().body(comentario);
 	}
