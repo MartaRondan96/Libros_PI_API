@@ -65,9 +65,9 @@ public class ComentarioServiceImpl implements ComentarioService {
 		return transform(comentarioRepository.findById(id));
 	}
 	@Override
-	public List<Comentario> getComentariosLibro(int id) {
+	public List<ComentarioDTO> getComentariosLibro(int id) {
 		Libro l = librosRepository.findById(id);
-		List<Comentario> list = l.getComentariosList();
+		List<ComentarioDTO> list = l.getComentariosList().stream().map(c -> transform(c)).collect(Collectors.toList());
 		return list;
 	}
 

@@ -13,5 +13,5 @@ public interface ComentarioService {
 	public abstract Comentario transform(ComentarioDTO ComentariosDTO);
 	public abstract ComentarioDTO transform(Comentario Comentario);
 	public abstract ComentarioDTO findComentario(int id);
-	public abstract List<Comentario> getComentariosLibro(int id);
+	public abstract List<ComentarioDTO> getComentariosLibro(int id);
 }

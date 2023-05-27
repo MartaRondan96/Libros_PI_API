@@ -157,7 +157,7 @@ public class RestLibros {
 	//Endpoint muestra todos los comentarios de un libro
 	@GetMapping("/libros/comentario/{idLibro}")
 	private ResponseEntity<?> readComentariosByIdLibro(@PathVariable int idLibro){
-		List<Comentario> listComentarios = comentarioService.getComentariosLibro(idLibro);
+		List<ComentarioDTO> listComentarios = comentarioService.getComentariosLibro(idLibro);
 		return ResponseEntity.ok(listComentarios);
 	}
 	
