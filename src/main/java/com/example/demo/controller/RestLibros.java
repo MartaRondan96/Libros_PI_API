@@ -2,8 +2,6 @@ package com.example.demo.controller;
 
 import java.util.List;
 
-import com.example.demo.entity.Comentario;
-import com.example.demo.entity.Libro;
 import com.example.demo.repository.LibroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -23,11 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.entity.User;
 import com.example.demo.model.ComentarioDTO;
 import com.example.demo.model.LibroDTO;
-import com.example.demo.model.PagActualDTO;
 import com.example.demo.model.ValoracionDTO;
 import com.example.demo.service.ComentarioService;
 import com.example.demo.service.LibroService;
-import com.example.demo.service.PagActualService;
 import com.example.demo.service.ValoracionService;
 import com.example.demo.serviceImpl.UserService;
 
@@ -45,8 +41,6 @@ public class RestLibros {
 	private ValoracionService valoracionService;
 	@Autowired
 	private ComentarioService comentarioService;
-	@Autowired
-	private PagActualService pagActualService;
 	@Autowired
 	@Qualifier("userService")
 	private UserService userService;
@@ -170,39 +164,5 @@ public class RestLibros {
 		comentario.setIdUsuario(u.getId());
 		comentarioService.addComentario(comentario);
 		return ResponseEntity.ok().body(comentario);
-	}
-	
-	// PUT Actualiza la pagina actual de un libro 
-	@PutMapping("/pagina/{id}")
-	public ResponseEntity<?> updatePaginaAct(@RequestBody PagActualDTO pag,@PathVariable int id) {
-		boolean exist = pagActualService.findPagActual(id)!=null;
-		if(exist) {
-			PagActualDTO p= pagActualService.findPagActual(id);
-			p.setNum_Pag(pag.getNum_Pag());
-			
-			return ResponseEntity.ok(pagActualService.addPagActual(p));
-			}
-		else {
-			return ResponseEntity.noContent().build();
-		}
-	}
-	
-	//GET Obtiene la pagina actual de un libro
-	@GetMapping("/pagina")
-	public ResponseEntity<?> getPaginaAct(@RequestParam int idUsuario,@RequestParam int idLibro){
-		boolean exist = pagActualService.findPagActualIdUsuarioAndIdLibro(idUsuario,idLibro)!=null;
-		if(exist) {
-			PagActualDTO pag=pagActualService.findPagActualIdUsuarioAndIdLibro(idUsuario,idLibro);
-			return ResponseEntity.ok(pag);
-		}
-		else
-			return ResponseEntity.noContent().build();
-	}
-	
- 
-	@PostMapping("/pagina")
-	private ResponseEntity<?> addPagina(@RequestBody PagActualDTO pag){
-		pagActualService.addPagActual(pag);
-		return ResponseEntity.ok().body(pag);
 	}
 }

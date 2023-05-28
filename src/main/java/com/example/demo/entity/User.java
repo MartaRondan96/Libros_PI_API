@@ -35,9 +35,6 @@ public class User {
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
     private List<Valoracion> listValoraciones;
-	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
-    private List<PagActual> listPagina;
 	
 	public User() {
 		super();

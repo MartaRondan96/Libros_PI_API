@@ -28,14 +28,11 @@ public class Libro {
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idLibro")
     private List<Valoracion> listValoraciones;
-	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idLibro")
-    private List<PagActual> listPagina;
 
 	public Libro() {
 	}
 
-	public Libro(int id, String titulo, String autor, String resumen, String ISBN, int pag, float nota, String imagen, List<Comentario> comentariosList, List<Valoracion> listValoraciones, List<PagActual> listPagina) {
+	public Libro(int id, String titulo, String autor, String resumen, String ISBN, int pag, float nota, String imagen, List<Comentario> comentariosList, List<Valoracion> listValoraciones) {
 		this.id = id;
 		this.titulo = titulo;
 		this.autor = autor;
@@ -46,7 +43,6 @@ public class Libro {
 		this.imagen = imagen;
 		this.comentariosList = comentariosList;
 		this.listValoraciones = listValoraciones;
-		this.listPagina = listPagina;
 	}
 
 	public int getId() {
@@ -129,11 +125,4 @@ public class Libro {
 		this.listValoraciones = listValoraciones;
 	}
 
-	public List<PagActual> getListPagina() {
-		return listPagina;
-	}
-
-	public void setListPagina(List<PagActual> listPagina) {
-		this.listPagina = listPagina;
-	}
 }
