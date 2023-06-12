@@ -34,7 +34,7 @@ public class UserService implements UserDetailsService {
 
 	public com.example.demo.entity.User register(com.example.demo.entity.User user) {
 		user.setPassword(passwordEncoder().encode(user.getPassword()));
-		user.setEnabled(true);
+		user.setEnabled(false);
 		user.setRole("ROLE_USER");
 		user.setListFavs(new ArrayList());
 		return userRepository.save(user);

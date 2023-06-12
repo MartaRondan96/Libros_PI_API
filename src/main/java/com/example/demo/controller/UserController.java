@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -86,5 +87,13 @@ public class UserController {
 		}
 		else
 			return ResponseEntity.noContent().build();
+	}
+	@PatchMapping("/all/update")
+	public ResponseEntity<?> updateAppointmentNew (@RequestBody User user)
+	{
+
+		userService.register(user);
+		return ResponseEntity.status(HttpStatus.CREATED).body(user);
+
 	}
 }
