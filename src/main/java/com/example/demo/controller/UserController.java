@@ -67,8 +67,8 @@ public class UserController {
 
 	@GetMapping("/all/{id}")
 	private ResponseEntity<?> getUserById(@PathVariable int id) {
+		System.out.println("Holi");
 		boolean exist = userService.findUserId(id)!=null;
-		System.out.println(exist);
 		if(exist) {
 			User user=userService.findUserId(id);
 			return ResponseEntity.ok(user);
@@ -91,8 +91,7 @@ public class UserController {
 	@PatchMapping("/all/update")
 	public ResponseEntity<?> updateAppointmentNew (@RequestBody User user)
 	{
-
-		userService.register(user);
+		userService.update(user);
 		return ResponseEntity.status(HttpStatus.CREATED).body(user);
 
 	}

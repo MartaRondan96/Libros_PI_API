@@ -39,6 +39,13 @@ public class UserService implements UserDetailsService {
 		user.setListFavs(new ArrayList());
 		return userRepository.save(user);
 	}
+	public com.example.demo.entity.User update(com.example.demo.entity.User user) {
+		user.setPassword(passwordEncoder().encode(user.getPassword()));
+		user.setEnabled(true);
+		user.setRole("ROLE_USER");
+		user.setListFavs(new ArrayList());
+		return userRepository.save(user);
+	}
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
